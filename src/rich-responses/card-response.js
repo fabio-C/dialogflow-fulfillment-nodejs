@@ -274,7 +274,7 @@ class Card extends RichResponse {
       if (this.buttonText && this.buttonUrl) {
         response.card.buttons = [];
         response.card.buttons[0] = {};
-        response.card.buttons[0].text = this.buttonText;
+        response.card.buttons[0].text = "suca";//this.buttonText;
         response.card.buttons[0].postback = this.buttonUrl;
       }
       // response is the same for generic responses without the platform attribute
