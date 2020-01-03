@@ -75,6 +75,9 @@ class Card extends RichResponse {
       this.buttonText1 = card.buttonText1; //f-C
       this.buttonUrl1 = card.buttonUrl1; //f-C
 
+      this.buttonText2 = card.buttonText2; //f-C
+      this.buttonUrl2 = card.buttonUrl2; //f-C
+
       if (
         typeof card.platform !== 'undefined' &&
         card.platform !== PLATFORMS.UNSPECIFIED
@@ -288,6 +291,11 @@ class Card extends RichResponse {
         response.card.buttons[1] = {};
         response.card.buttons[1].text = this.buttonText1;
         response.card.buttons[1].postback = this.buttonUrl1;
+      }
+      if (this.buttonText2 && this.buttonUrl2) {
+        response.card.buttons[2] = {};
+        response.card.buttons[2].text = this.buttonText2;
+        response.card.buttons[2].postback = this.buttonUrl2;
       }
       // response is the same for generic responses without the platform attribute
       // if the platform is not undefined or the platform is not unspecified
