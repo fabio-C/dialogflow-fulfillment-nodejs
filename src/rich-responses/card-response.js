@@ -279,12 +279,14 @@ class Card extends RichResponse {
       if (this.text) response.card.subtitle = this.text;
       if (this.imageUrl) response.card.imageUri = this.imageUrl;
       if (this.buttonText && this.buttonUrl) {
+        console.log("adding button0");
         response.card.buttons = [];
         response.card.buttons[0] = {};
         response.card.buttons[0].text = this.buttonText;
         response.card.buttons[0].postback = this.buttonUrl;
       }
       if (this.buttonText1 && this.buttonUrl1) {
+        console.log("adding button1");
         response.card.buttons[1] = {};
         response.card.buttons[1].text = this.buttonText1;
         response.card.buttons[1].postback = this.buttonUrl1;
