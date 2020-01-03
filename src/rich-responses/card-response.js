@@ -44,7 +44,10 @@ class Card extends RichResponse {
    *     imageUrl: https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png,
    *     buttonText: This is a button',
    *     buttonUrl: 'https://assistant.google.com/',
-   *     platform: 'ACTIONS_ON_GOOGLE'
+   *     platform: 'ACTIONS_ON_GOOGLE',
+
+         buttonText1: '',
+         buttonUrl1: '',
    * });
    *
    * @param {string|Object} card response title string or an object representing a card response
@@ -68,6 +71,10 @@ class Card extends RichResponse {
       }
       this.buttonText = card.buttonText;
       this.buttonUrl = card.buttonUrl;
+
+      this.buttonText1 = card.buttonText1; //f-C
+      this.buttonUrl1 = card.buttonUrl1; //f-C
+
       if (
         typeof card.platform !== 'undefined' &&
         card.platform !== PLATFORMS.UNSPECIFIED
@@ -274,8 +281,13 @@ class Card extends RichResponse {
       if (this.buttonText && this.buttonUrl) {
         response.card.buttons = [];
         response.card.buttons[0] = {};
-        response.card.buttons[0].text = "suca";//this.buttonText;
+        response.card.buttons[0].text = this.buttonText;
         response.card.buttons[0].postback = this.buttonUrl;
+      }
+      if (this.buttonText1 && this.buttonUrl1) {
+        response.card.buttons[1] = {};
+        response.card.buttons[1].text = this.buttonText1;
+        response.card.buttons[1].postback = this.buttonUrl1;
       }
       // response is the same for generic responses without the platform attribute
       // if the platform is not undefined or the platform is not unspecified
