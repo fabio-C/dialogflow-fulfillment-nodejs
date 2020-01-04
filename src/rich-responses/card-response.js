@@ -60,6 +60,8 @@ class Card extends RichResponse {
   constructor(card) {
     super();
 
+    console.log("creating card v5");
+
     if (card === undefined || (typeof card === 'object' && !card.title)) {
       throw new Error('title string required by Card constructor');
     }
@@ -246,7 +248,7 @@ class Card extends RichResponse {
       if (this.imageUrl) response.imageUrl = this.imageUrl;
       // this is required in the response even if there are no buttons for some reason
       if (platform === PLATFORMS.SLACK) response.buttons = [];
-      
+
       response.card.buttons = [];
       if (this.buttonText1 && this.buttonUrl1) {
         response.card.buttons[0] = {};
