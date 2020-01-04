@@ -60,7 +60,7 @@ class Card extends RichResponse {
   constructor(card) {
     super();
 
-    console.log("creating card v1");
+    console.log("creating card v2");
 
     if (card === undefined || (typeof card === 'object' && !card.title)) {
       throw new Error('title string required by Card constructor');
@@ -68,6 +68,9 @@ class Card extends RichResponse {
     if (typeof card === 'string') {
       this.title = card;
     } else if (typeof card === 'object') {
+
+      console.log(card);
+
       this.title = card.title;
       this.text = card.text;
       this.imageUrl = card.imageUrl;
@@ -260,6 +263,9 @@ class Card extends RichResponse {
    * @private
    */
   getV2ResponseObject_(platform) {
+
+    console.log("getV2ResponseObject_");
+
     // Check if response is platform specific
     if (this.platform && this.platform !== platform) {
       // if it is and is not for the specific platform return null
@@ -315,6 +321,9 @@ class Card extends RichResponse {
         response.platform = platform;
       }
     }
+
+    console.log(response);
+    
     return response;
   }
 }
