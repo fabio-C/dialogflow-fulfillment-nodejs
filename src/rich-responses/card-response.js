@@ -286,7 +286,6 @@ class Card extends RichResponse {
       response.card.buttons[0].text = "test2";
       response.card.buttons[0].postback = "test2";
       
-      response.card.buttons = [];
       response.card.buttons[1] = {};
       response.card.buttons[1].text = "test2";
       response.card.buttons[1].postback = "test2";
