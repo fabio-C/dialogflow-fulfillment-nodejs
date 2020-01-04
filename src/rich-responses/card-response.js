@@ -60,8 +60,6 @@ class Card extends RichResponse {
   constructor(card) {
     super();
 
-    console.log("creating card v4");
-
     if (card === undefined || (typeof card === 'object' && !card.title)) {
       throw new Error('title string required by Card constructor');
     }
@@ -72,14 +70,7 @@ class Card extends RichResponse {
       this.title = card.title;
       this.text = card.text;
       this.imageUrl = card.imageUrl;
-      /*
-      if (
-        (!card.buttonText && card.buttonUrl) ||
-        (!card.buttonUrl && card.buttonText)
-      ) {
-        throw new Error('card button requires both title and link');
-      }
-      */
+
       this.buttonText1 = card.buttonText1;
       this.buttonUrl1 = card.buttonUrl1;
 
@@ -171,15 +162,37 @@ class Card extends RichResponse {
    * @param {Object} options.url button link URL
    * @return {Card}
    */
-  setButton(button) {
+  setButton1(button) {
     if ((!button.text && button.url) || (!button.url && button.text)) {
       throw new Error(
         `card button requires button title and url. \
 \nUsage: setButton({text: \'button text\', url: \'http://yoururlhere.com\'}`
       );
     }
-    this.buttonText = button.text;
-    this.buttonUrl = button.url;
+    this.buttonText1 = button.text;
+    this.buttonUrl1 = button.url;
+    return this;
+  }
+  setButton2(button) {
+    if ((!button.text && button.url) || (!button.url && button.text)) {
+      throw new Error(
+        `card button requires button title and url. \
+\nUsage: setButton({text: \'button text\', url: \'http://yoururlhere.com\'}`
+      );
+    }
+    this.buttonText2 = button.text;
+    this.buttonUrl2 = button.url;
+    return this;
+  }
+  setButton3(button) {
+    if ((!button.text && button.url) || (!button.url && button.text)) {
+      throw new Error(
+        `card button requires button title and url. \
+\nUsage: setButton({text: \'button text\', url: \'http://yoururlhere.com\'}`
+      );
+    }
+    this.buttonText3 = button.text;
+    this.buttonUrl3 = button.url;
     return this;
   }
 
@@ -233,11 +246,22 @@ class Card extends RichResponse {
       if (this.imageUrl) response.imageUrl = this.imageUrl;
       // this is required in the response even if there are no buttons for some reason
       if (platform === PLATFORMS.SLACK) response.buttons = [];
-      if (this.buttonText && this.buttonUrl) {
-        response.buttons = [];
-        response.buttons[0] = {};
-        response.buttons[0].text = this.buttonText;
-        response.buttons[0].postback = this.buttonUrl;
+      
+      response.card.buttons = [];
+      if (this.buttonText1 && this.buttonUrl1) {
+        response.card.buttons[0] = {};
+        response.card.buttons[0].text = this.buttonText1;
+        response.card.buttons[0].postback = this.buttonUrl1;
+      }
+      if (this.buttonText2 && this.buttonUrl2) {
+        response.card.buttons[1] = {};
+        response.card.buttons[1].text = this.buttonText2;
+        response.card.buttons[1].postback = this.buttonUrl2;
+      }
+      if (this.buttonText3 && this.buttonUrl3) {
+        response.card.buttons[2] = {};
+        response.card.buttons[2].text = this.buttonText3;
+        response.card.buttons[2].postback = this.buttonUrl3;
       }
       // response is the same for generic responses without the platform attribute
       // if the platform is not undefined or the platform is not unspecified
@@ -290,8 +314,6 @@ class Card extends RichResponse {
       }
     } else {
 
-      console.log(this);
-
       response = {card: {}};
       response.card.title = this.title;
       if (this.text) response.card.subtitle = this.text;
@@ -299,19 +321,16 @@ class Card extends RichResponse {
 
       response.card.buttons = [];
       if (this.buttonText1 && this.buttonUrl1) {
-        console.log("add1");
         response.card.buttons[0] = {};
         response.card.buttons[0].text = this.buttonText1;
         response.card.buttons[0].postback = this.buttonUrl1;
       }
       if (this.buttonText2 && this.buttonUrl2) {
-        console.log("add2");
         response.card.buttons[1] = {};
         response.card.buttons[1].text = this.buttonText2;
         response.card.buttons[1].postback = this.buttonUrl2;
       }
       if (this.buttonText3 && this.buttonUrl3) {
-        console.log("add3");
         response.card.buttons[2] = {};
         response.card.buttons[2].text = this.buttonText3;
         response.card.buttons[2].postback = this.buttonUrl3;
@@ -323,9 +342,6 @@ class Card extends RichResponse {
         response.platform = platform;
       }
     }
-
-    console.log(response.card.buttons);
-
     return response;
   }
 }
