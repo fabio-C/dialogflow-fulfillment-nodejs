@@ -278,6 +278,14 @@ class Card extends RichResponse {
       response.card.title = this.title;
       if (this.text) response.card.subtitle = this.text;
       if (this.imageUrl) response.card.imageUri = this.imageUrl;
+       
+      
+      
+      response.card.buttons = [];
+      response.card.buttons[0] = {};
+      response.card.buttons[0].text = "test1";
+      response.card.buttons[0].postback = "test1";
+      /*
       if (this.buttonText && this.buttonUrl) {
         console.log("adding button0");
         response.card.buttons = [];
@@ -291,6 +299,8 @@ class Card extends RichResponse {
         response.card.buttons[1].text = this.buttonText1;
         response.card.buttons[1].postback = this.buttonUrl1;
       }
+      */
+      
       // response is the same for generic responses without the platform attribute
       // if the platform is not undefined or the platform is not unspecified
       if (SUPPORTED_RICH_MESSAGE_PLATFORMS.indexOf(platform) > -1) {
