@@ -37,7 +37,10 @@ class Card extends RichResponse {
    * let card = new Card('card title');
    * card.setImage('https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png');
    * card.setText('This is the body text of a card.  You can even use line\nbreaks and emoji! 💁');
-   * card.setButton({text: 'This is a button', url: 'https://assistant.google.com/'});
+   * card.setButton1({text: 'This is a button', url: 'https://assistant.google.com/'});
+   * card.setButton2({text: 'This is a button', url: 'https://assistant.google.com/'});
+   * card.setButton3({text: 'This is a button', url: 'https://assistant.google.com/'});
+   *
    * const anotherCard = new Card({
    *     title: 'card title',
    *     text: 'card text',
@@ -59,8 +62,6 @@ class Card extends RichResponse {
    */
   constructor(card) {
     super();
-
-    console.log("creating card v5");
 
     if (card === undefined || (typeof card === 'object' && !card.title)) {
       throw new Error('title string required by Card constructor');
