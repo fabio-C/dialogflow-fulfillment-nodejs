@@ -60,7 +60,7 @@ class Card extends RichResponse {
   constructor(card) {
     super();
 
-    console.log("creating card v2");
+    console.log("creating card v3");
 
     if (card === undefined || (typeof card === 'object' && !card.title)) {
       throw new Error('title string required by Card constructor');
@@ -68,8 +68,6 @@ class Card extends RichResponse {
     if (typeof card === 'string') {
       this.title = card;
     } else if (typeof card === 'object') {
-
-      console.log(card);
 
       this.title = card.title;
       this.text = card.text;
@@ -264,7 +262,7 @@ class Card extends RichResponse {
    */
   getV2ResponseObject_(platform) {
 
-    console.log("getV2ResponseObject_");
+    
 
     // Check if response is platform specific
     if (this.platform && this.platform !== platform) {
@@ -293,6 +291,9 @@ class Card extends RichResponse {
         }];
       }
     } else {
+
+      console.log("not actions on google");
+
       response = {card: {}};
       response.card.title = this.title;
       if (this.text) response.card.subtitle = this.text;
@@ -300,16 +301,19 @@ class Card extends RichResponse {
 
       response.card.buttons = [];
       if (this.buttonText1 && this.buttonUrl1) {
+        console.log("add1");
         response.card.buttons[0] = {};
         response.card.buttons[0].text = this.buttonText1;
         response.card.buttons[0].postback = this.buttonUrl1;
       }
       if (this.buttonText2 && this.buttonUrl2) {
+        console.log("add2");
         response.card.buttons[1] = {};
         response.card.buttons[1].text = this.buttonText2;
         response.card.buttons[1].postback = this.buttonUrl2;
       }
       if (this.buttonText3 && this.buttonUrl3) {
+        console.log("add3");
         response.card.buttons[2] = {};
         response.card.buttons[2].text = this.buttonText3;
         response.card.buttons[2].postback = this.buttonUrl3;
@@ -322,8 +326,8 @@ class Card extends RichResponse {
       }
     }
 
-    console.log(response);
-    
+    console.log(response.buttons);
+
     return response;
   }
 }
