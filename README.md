@@ -1,8 +1,10 @@
-Original library https://github.com/dialogflow/dialogflow-fulfillment-nodejs
+Unofficial fork of https://github.com/dialogflow/dialogflow-fulfillment-nodejs
 
 Changes:
 
 - The Card support **MULTI buttons**
+
+**Tested Only of Facebook/Messanger Platform.**
 
 Example:
 
@@ -28,3 +30,4 @@ const anotherCard = new Card({
 });
 ```
     
+Max numbers of buttons: 3
